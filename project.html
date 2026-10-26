@@ -54,6 +54,7 @@
     <ul class="sub">
       <li><a href="project.html#s-proj">캡스톤 프로젝트</a></li>
       <li><a href="project.html#s-role">담당 역할</a></li>
+      <li><a href="project.html#s-trouble">문제 해결</a></li>
       <li><a href="project.html#s-tech">사용 기술</a></li>
       <li><a href="project.html#s-cert">자격증</a></li>
     </ul>
@@ -75,16 +76,16 @@
 
       <section aria-labelledby="s-proj">
         <h2 id="s-proj">캡스톤 프로젝트</h2>
-        <p class="proj-title">실시간 수어 번역 모바일 앱</p>
-        <p class="proj-sub">Sign Language Real-Time Translation App</p>
+        <p class="proj-title">Smart Fridge</p>
+        <p class="proj-sub">영수증 한 장으로 시작하는 AI 냉장고 관리 · 맞춤 레시피 추천 서비스</p>
 
         <dl class="facts">
-          <div><dt>형태</dt><dd>3~4인 팀 프로젝트</dd></div>
-          <div><dt>역할</dt><dd>백엔드 &amp; 데이터베이스</dd></div>
-          <div><dt>상태</dt><dd>개발 중</dd></div>
+          <div><dt>형태</dt><dd>2인 팀 (백엔드 · 안드로이드)</dd></div>
+          <div><dt>역할</dt><dd>백엔드 · DB · AI 연동</dd></div>
+          <div><dt>기간</dt><dd>2026.03 ~ 진행 중</dd></div>
         </dl>
 
-        <p>청각 장애인의 의사소통 장벽 해소를 목표로 개발한 Android 기반 실시간 수어 번역 앱입니다. 카메라로 수어 동작을 인식하고, 텍스트와 음성으로 실시간 변환하는 기능을 구현하고 있습니다.</p>
+        <p>음식물쓰레기가 가장 많이 나오는 곳은 가정입니다. Smart Fridge는 영수증을 찍으면 AI가 식재료를 등록하고, 유통기한을 자동으로 계산해 곧 상할 재료를 먼저 쓰는 레시피를 추천합니다. 알레르기 14종과 식단 목적 5종(일반식 · 다이어트 · 저염 · 고단백 · 비건)도 함께 반영합니다.</p>
 
         <!-- 시연 영상이나 화면 캡처가 생기면 아래 주석을 풀고 images 폴더에 파일을 넣으세요.
         <video controls playsinline poster="images/demo.jpg" style="width:100%;border-radius:12px">
@@ -93,39 +94,64 @@
         -->
 
         <ol class="flow" aria-label="시스템 구조 개요">
-          <li><strong>앱</strong><span>카메라로 수어 동작 입력</span></li>
-          <li><strong>RESTful API</strong><span>클라이언트-서버 통신</span></li>
-          <li><strong>서버</strong><span>수어 인식 결과 처리</span></li>
-          <li><strong>DB</strong><span>인식 데이터·사용자 정보 저장</span></li>
+          <li><strong>Android 앱</strong><span>Retrofit으로 서버와 통신</span></li>
+          <li><strong>Spring Boot 서버</strong><span>REST API 14개 · 규칙 기반 필터</span></li>
+          <li><strong>Oracle DB</strong><span>공공 레시피 1,156건 · 사용자별 냉장고</span></li>
+          <li><strong>Claude API</strong><span>영수증 분석 · 대화형 추천 (서버에서만 호출)</span></li>
         </ol>
+
+        <p class="statement">틀리면 위험한 판단(알레르기 · 수치)은 규칙으로, 애매한 해석(취향 · 문장)만 AI로.</p>
       </section>
 
       <section aria-labelledby="s-role">
         <h2 id="s-role">담당 역할</h2>
         <dl class="roles">
           <div>
-            <dt>백엔드 서버 설계 &amp; 구현</dt>
-            <dd>클라이언트(앱)와의 데이터 통신을 위한 RESTful API를 설계하고 개발했습니다. 수어 인식 결과를 처리하는 로직을 구현했습니다.</dd>
+            <dt>백엔드 서버 &amp; REST API</dt>
+            <dd>Spring Boot(Java 17)로 냉장고 · 레시피 REST API 14개를 설계하고 구현했습니다. 모든 API에 입력값 검증을 적용해 문제가 있으면 사유를 담은 400 응답을 돌려줍니다.</dd>
           </div>
           <div>
-            <dt>데이터베이스 설계</dt>
-            <dd>수어 인식 데이터와 사용자 정보를 저장하는 DB 스키마를 설계하고, 데이터 무결성과 성능을 최적화했습니다.</dd>
+            <dt>데이터 수집 &amp; DB 설계</dt>
+            <dd>식약처 공공데이터(COOKRCP01)에서 레시피 1,156건을 서버 최초 실행 시 자동 적재합니다. 영양소를 열량으로 환산해 교차검증하고, 물리적으로 불가능한 값 23건을 자동으로 걸러냈습니다. Oracle DB 스키마는 JPA로 관리합니다.</dd>
           </div>
           <div>
-            <dt>실시간 데이터 처리 최적화</dt>
-            <dd>번역 결과의 지연을 최소화하도록 서버 로직 구조를 설계하고, 클라이언트-서버 간 데이터 흐름을 최적화했습니다.</dd>
+            <dt>맞춤 추천 로직</dt>
+            <dd>보유 재료 매칭 → 알레르기 제외 → 식단 · 영양 기준 → 유통기한 임박 우선 정렬까지는 규칙으로 처리하고, 마지막에 AI가 상위 40개 중 요청에 맞는 최대 5개를 이유와 함께 고릅니다.</dd>
           </div>
           <div>
-            <dt>기술 자기주도 학습 &amp; 트러블슈팅</dt>
-            <dd>실시간 번역 요구사항을 구현하려고 기술 문서를 스스로 탐독해 팀에 적용하고, 문제 해결을 주도했습니다.</dd>
+            <dt>AI 연동 &amp; 키 보안</dt>
+            <dd>Claude API(Haiku 4.5)로 영수증 식재료 추출, 대화형 추천, 추천 이유 설명, 영어 번역, 임박 알림 문구를 구현했습니다. API 키와 DB 접속정보는 서버 설정 파일에만 두고, 앱에는 키가 없도록 설계했습니다.</dd>
           </div>
         </dl>
+      </section>
+
+      <section aria-labelledby="s-trouble">
+        <h2 id="s-trouble">문제 해결</h2>
+        <dl class="roles">
+          <div>
+            <dt>앱 코드에 AI API 키 하드코딩</dt>
+            <dd>APK를 디컴파일하면 키가 노출되는 문제가 있었습니다. 영수증 분석을 서버 경유 호출로 바꾸고 키는 서버에만 보관했습니다.</dd>
+          </div>
+          <div>
+            <dt>사용자 간 데이터 혼재</dt>
+            <dd>앱은 userId를 보냈지만 서버가 무시해 모든 사용자의 재료가 섞였습니다. userId 컬럼을 추가하고 모든 조회 · 추천 API에 사용자 필터를 적용했습니다.</dd>
+          </div>
+          <div>
+            <dt>원본 데이터의 영양정보 오류</dt>
+            <dd>단백질 807g처럼 불가능한 값이 추천 순위를 왜곡했습니다. 열량 환산 교차검증으로 23건을 자동 제외했습니다.</dd>
+          </div>
+          <div>
+            <dt>영문 데이터로는 한국어 재료 매칭 불가</dt>
+            <dd>'계란'으로 검색해도 'egg' 레시피가 나오지 않았습니다. 식약처 한국어 공공데이터로 교체해 영양정보와 조리순서까지 확보했습니다.</dd>
+          </div>
+        </dl>
+        <p class="flow-note"><span class="pill">중간발표 기준</span> REST API 14개 중 9개 테스트 완료, 주요 테스트 케이스 8건 PASS. AI 기능 5종은 구현을 마쳤고 연동 테스트를 앞두고 있습니다.</p>
       </section>
 
       <section aria-labelledby="s-tech">
         <h2 id="s-tech">사용 기술</h2>
         <ul class="chips g-be">
-          <li>Android Studio</li><li>Java / Kotlin</li><li>RESTful API</li><li>SQL</li><li>DB 스키마 설계</li><li>클라이언트-서버 통신</li><li>실시간 데이터 처리</li>
+          <li>Java 17</li><li>Spring Boot</li><li>Spring Data JPA</li><li>Oracle DB</li><li>REST API 설계</li><li>Claude API</li><li>공공데이터 API</li><li>입력값 검증</li><li>Retrofit 연동</li>
         </ul>
       </section>
 
