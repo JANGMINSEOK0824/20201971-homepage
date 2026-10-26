@@ -123,4 +123,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+  // 4. 스크롤 등장 효과: 화면에 들어온 섹션과 카드가 아래에서 부드럽게 올라옴
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    const targets = document.querySelectorAll("main > section, .links");
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(function (el) {
+      el.classList.add("reveal");
+      io.observe(el);
+    });
+  }
 });
