@@ -1,0 +1,10 @@
+[ 포트 폴리오 레퍼런스 사이트] 모바일 통합 구현 사이트
+
+1. Awwwards - https://www.awwwards.com
+   용도: 레이아웃, 애니메이션 아이디어
+2. Dribbble - https://dribbble.com
+   용도: 색 조합, 카드 배치 (화이트+블루 비교)
+3. CodePen - https://codepen.io
+   용도: CSS 효과, 코드 참고
+4. Brittany Chiang - https://brittanychiang.com
+   용도: 경력/프로젝트/기술 스택 구성

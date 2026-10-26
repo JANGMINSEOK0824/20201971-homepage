@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>프로젝트 | 장민석 포트폴리오</title>
+  <meta name="description" content="Junior AI Developer &amp; Android Backend Developer 장민석의 모바일 포트폴리오">
+  <meta name="theme-color" content="#0a2530">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230A2530'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%233DDBB0'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="mportfolio.css">
+   <script src="mouse_event.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+
+  <!-- 공통 배너 -->
+  <header class="banner">
+    <div class="wrap banner-in">
+      <h1 class="name">장민석<span class="en">MIN SEOK JANG</span></h1>
+      <p class="role">Junior AI Developer &amp; Android Backend Developer</p>
+      <svg class="graph" viewBox="0 0 180 70" aria-hidden="true" focusable="false">
+        <polyline class="line" points="10,56 62,24 112,44 160,14"/>
+        <circle class="node" cx="10" cy="56" r="3.5"/>
+        <circle class="node" cx="62" cy="24" r="3.5"/>
+        <circle class="node" cx="112" cy="44" r="3.5"/>
+        <circle class="halo" cx="160" cy="14" r="9"/>
+        <circle class="out" cx="160" cy="14" r="5"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- 공통 메뉴 -->
+  <nav class="tabs" aria-label="페이지 메뉴">
+    <ul>
+  <li>
+    <a href="index.html" aria-current="page">소개</a>
+    <ul class="sub">
+      <li><a href="index.html#s-intro">자기소개</a></li>
+      <li><a href="index.html#s-stack">기술 스택</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="info.html">인적사항</a>
+    <ul class="sub">
+      <li><a href="info.html#s-info">인적사항</a></li>
+      <li><a href="info.html#s-edu">학력</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="project.html">프로젝트</a>
+    <ul class="sub">
+      <li><a href="project.html#s-proj">캡스톤 프로젝트</a></li>
+      <li><a href="project.html#s-role">담당 역할</a></li>
+      <li><a href="project.html#s-tech">사용 기술</a></li>
+      <li><a href="project.html#s-cert">자격증</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="career.html">커리어</a>
+    <ul class="sub">
+      <li><a href="career.html#s-learn">교육 이수</a></li>
+      <li><a href="career.html#s-goal">커리어 목표</a></li>
+    </ul>
+  </li>
+</ul>
+  </nav>
+
+  <div class="wrap page">
+    <main id="main" class="card">
+
+      <section aria-labelledby="s-proj">
+        <h2 id="s-proj">캡스톤 프로젝트</h2>
+        <p class="proj-title">실시간 수어 번역 모바일 앱</p>
+        <p class="proj-sub">Sign Language Real-Time Translation App</p>
+
+        <dl class="facts">
+          <div><dt>형태</dt><dd>3~4인 팀 프로젝트</dd></div>
+          <div><dt>역할</dt><dd>백엔드 &amp; 데이터베이스</dd></div>
+          <div><dt>상태</dt><dd>개발 중</dd></div>
+        </dl>
+
+        <p>청각 장애인의 의사소통 장벽 해소를 목표로 개발한 Android 기반 실시간 수어 번역 앱입니다. 카메라로 수어 동작을 인식하고, 텍스트와 음성으로 실시간 변환하는 기능을 구현하고 있습니다.</p>
+
+        <!-- 시연 영상이나 화면 캡처가 생기면 아래 주석을 풀고 images 폴더에 파일을 넣으세요.
+        <video controls playsinline poster="images/demo.jpg" style="width:100%;border-radius:12px">
+          <source src="images/demo.mp4" type="video/mp4">
+        </video>
+        -->
+
+        <ol class="flow" aria-label="시스템 구조 개요">
+          <li><strong>앱</strong><span>카메라로 수어 동작 입력</span></li>
+          <li><strong>RESTful API</strong><span>클라이언트-서버 통신</span></li>
+          <li><strong>서버</strong><span>수어 인식 결과 처리</span></li>
+          <li><strong>DB</strong><span>인식 데이터·사용자 정보 저장</span></li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="s-role">
+        <h2 id="s-role">담당 역할</h2>
+        <dl class="roles">
+          <div>
+            <dt>백엔드 서버 설계 &amp; 구현</dt>
+            <dd>클라이언트(앱)와의 데이터 통신을 위한 RESTful API를 설계하고 개발했습니다. 수어 인식 결과를 처리하는 로직을 구현했습니다.</dd>
+          </div>
+          <div>
+            <dt>데이터베이스 설계</dt>
+            <dd>수어 인식 데이터와 사용자 정보를 저장하는 DB 스키마를 설계하고, 데이터 무결성과 성능을 최적화했습니다.</dd>
+          </div>
+          <div>
+            <dt>실시간 데이터 처리 최적화</dt>
+            <dd>번역 결과의 지연을 최소화하도록 서버 로직 구조를 설계하고, 클라이언트-서버 간 데이터 흐름을 최적화했습니다.</dd>
+          </div>
+          <div>
+            <dt>기술 자기주도 학습 &amp; 트러블슈팅</dt>
+            <dd>실시간 번역 요구사항을 구현하려고 기술 문서를 스스로 탐독해 팀에 적용하고, 문제 해결을 주도했습니다.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="s-tech">
+        <h2 id="s-tech">사용 기술</h2>
+        <ul class="chips g-be">
+          <li>Android Studio</li><li>Java / Kotlin</li><li>RESTful API</li><li>SQL</li><li>DB 스키마 설계</li><li>클라이언트-서버 통신</li><li>실시간 데이터 처리</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="s-cert">
+        <h2 id="s-cert">자격증</h2>
+        <ul class="rows">
+          <li>
+            <strong>SAP Certified – Back-End Developer – ABAP Cloud</strong>
+            <span class="sub">SAP · 유효기간 2027.04.02까지</span>
+            <span class="sub date">2026.04.01 취득</span>
+          </li>
+          <li>
+            <strong>ITQ 한글엑셀 C등급</strong>
+            <span class="sub">한국생산성본부</span>
+            <span class="sub date">2019.06.13 취득</span>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- 공통 참조링크 -->
+    <aside class="card links" aria-labelledby="ref-title">
+      <h2 id="ref-title">참조링크</h2>
+      <ul class="link-list">
+        <li>
+          <a href="https://github.com/JANGMINSEOK0824" target="_blank" rel="noopener">
+            <span class="mark gh" aria-hidden="true">Git</span>
+            <span class="txt"><strong>GitHub</strong><small>코드와 실습 저장소</small></span>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.credly.com/badges/ee024c50-0053-4eda-8427-c08e9b1ab8bc" target="_blank" rel="noopener">
+            <span class="mark sap" aria-hidden="true">SAP</span>
+            <span class="txt"><strong>SAP 인증 배지</strong><small>ABAP Cloud 자격 확인</small></span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:infra6912@gmail.com">
+            <span class="mark ml" aria-hidden="true">@</span>
+            <span class="txt"><strong>이메일</strong><small>infra6912<wbr>@gmail.com</small></span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- 공통 푸터 -->
+  <footer class="foot">
+    <div class="wrap">Copyright &copy; 2026 Jang MinSeok</div>
+  </footer>
+
+  <a class="fab" href="ideas.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg>
+    아이디어
+  </a>
+</body>
+</html>
