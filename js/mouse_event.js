@@ -140,4 +140,28 @@ document.addEventListener("DOMContentLoaded", function () {
       io.observe(el);
     });
   }
+  // 5. 라이트 · 다크 전환 버튼: 고른 테마는 다음 방문에도 유지
+  const toggle = document.querySelector(".theme-toggle");
+  if (toggle) {
+    const root = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const current = function () {
+      return root.getAttribute("data-theme") || (media.matches ? "dark" : "light");
+    };
+    const label = function () {
+      const dark = current() === "dark";
+      toggle.setAttribute("aria-label", dark ? "라이트 모드로 전환" : "다크 모드로 전환");
+      toggle.title = dark ? "라이트 모드" : "다크 모드";
+    };
+    label();
+    toggle.addEventListener("click", function () {
+      const next = current() === "dark" ? "light" : "dark";
+      root.classList.add("theme-anim");
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      label();
+      setTimeout(function () { root.classList.remove("theme-anim"); }, 400);
+    });
+    media.addEventListener("change", label);
+  }
 });
