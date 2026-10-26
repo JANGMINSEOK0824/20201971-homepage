@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="mportfolio.css">
   <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
    <script src="js/mouse_event.js" defer></script>
+  <script src="js/enc-demo.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">본문 바로가기</a>
@@ -57,6 +58,7 @@
     <ul class="sub">
       <li><a href="info.html#s-info">인적사항</a></li>
       <li><a href="info.html#s-edu">학력</a></li>
+      <li><a href="info.html#s-chrono">연표</a></li>
       <li><a href="info.html#s-map">학교 위치</a></li>
     </ul>
   </li>
@@ -64,8 +66,11 @@
     <a href="project.html">프로젝트</a>
     <ul class="sub">
       <li><a href="project.html#s-proj">캡스톤 프로젝트</a></li>
+      <li><a href="project.html#s-screens">앱 화면</a></li>
+      <li><a href="project.html#s-pipeline">추천 로직</a></li>
       <li><a href="project.html#s-role">담당 역할</a></li>
       <li><a href="project.html#s-trouble">문제 해결</a></li>
+      <li><a href="project.html#s-api">API · 테스트</a></li>
       <li><a href="project.html#s-tech">사용 기술</a></li>
       <li><a href="project.html#s-cert">자격증</a></li>
     </ul>
@@ -74,9 +79,17 @@
     <a href="career.html" aria-current="page">커리어</a>
     <ul class="sub">
       <li><a href="career.html#s-work">경력</a></li>
+      <li><a href="career.html#s-demo">DB 암호화 체험</a></li>
       <li><a href="career.html#s-learn">교육 이수</a></li>
       <li><a href="career.html#s-prep">자격증 준비</a></li>
       <li><a href="career.html#s-goal">커리어 목표</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="guestbook.html">방명록</a>
+    <ul class="sub">
+      <li><a href="guestbook.html#s-guest">글 남기기</a></li>
+      <li><a href="guestbook.html#s-gsec">보안 설계</a></li>
     </ul>
   </li>
 </ul>
@@ -146,6 +159,38 @@
               </ul>
             </div>
           </li>
+      </section>
+
+      <section aria-labelledby="s-demo">
+        <h2 id="s-demo">DB 암호화 체험</h2>
+        <p>블루어드에서 경험한 개인정보 암호화를 직접 확인해 볼 수 있는 데모입니다. 값을 바꾼 뒤 <b>암호화 적용</b>을 누르면, DB에 실제로 저장되는 암호문과 화면에 보이는 마스킹 값이 나란히 나옵니다.</p>
+
+        <form class="enc-form" id="encForm" autocomplete="off">
+          <label>이름<input name="name" maxlength="20" value="홍길동"></label>
+          <label>주민등록번호<input name="rrn" maxlength="14" value="900101-1234567" inputmode="numeric"></label>
+          <label class="wide">주소<input name="addr" maxlength="60" value="경기도 성남시 분당구 판교역로 123"></label>
+          <div class="enc-actions">
+            <button type="submit" class="btn-primary">암호화 적용</button>
+            <button type="button" class="btn-ghost" id="encDecrypt" disabled>권한자 복호화</button>
+          </div>
+        </form>
+
+        <div class="table-wrap enc-result" id="encResult" hidden>
+          <table class="grid">
+            <thead>
+              <tr><th scope="col">컬럼</th><th scope="col">DB 저장값 (AES-256 암호문)</th><th scope="col">화면 표시 (마스킹)</th></tr>
+            </thead>
+            <tbody id="encRows"></tbody>
+          </table>
+        </div>
+        <p class="enc-note" id="encNote" hidden></p>
+
+        <div class="enc-bench">
+          <button type="button" class="btn-ghost" id="encBench">성능 테스트: 1만 건 암호화</button>
+          <span id="encBenchOut" class="muted" aria-live="polite"></span>
+        </div>
+
+        <p class="flow-note">예시 데이터로만 동작하는 학습용 데모입니다. 입력값은 이 브라우저 안에서만 처리되고 어디에도 저장 · 전송되지 않으며, 실제 고객사 솔루션의 방식과는 다릅니다.</p>
       </section>
 
       <section aria-labelledby="s-learn">

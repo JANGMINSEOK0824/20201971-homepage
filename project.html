@@ -57,6 +57,7 @@
     <ul class="sub">
       <li><a href="info.html#s-info">인적사항</a></li>
       <li><a href="info.html#s-edu">학력</a></li>
+      <li><a href="info.html#s-chrono">연표</a></li>
       <li><a href="info.html#s-map">학교 위치</a></li>
     </ul>
   </li>
@@ -64,8 +65,11 @@
     <a href="project.html" aria-current="page">프로젝트</a>
     <ul class="sub">
       <li><a href="project.html#s-proj">캡스톤 프로젝트</a></li>
+      <li><a href="project.html#s-screens">앱 화면</a></li>
+      <li><a href="project.html#s-pipeline">추천 로직</a></li>
       <li><a href="project.html#s-role">담당 역할</a></li>
       <li><a href="project.html#s-trouble">문제 해결</a></li>
+      <li><a href="project.html#s-api">API · 테스트</a></li>
       <li><a href="project.html#s-tech">사용 기술</a></li>
       <li><a href="project.html#s-cert">자격증</a></li>
     </ul>
@@ -74,9 +78,17 @@
     <a href="career.html">커리어</a>
     <ul class="sub">
       <li><a href="career.html#s-work">경력</a></li>
+      <li><a href="career.html#s-demo">DB 암호화 체험</a></li>
       <li><a href="career.html#s-learn">교육 이수</a></li>
       <li><a href="career.html#s-prep">자격증 준비</a></li>
       <li><a href="career.html#s-goal">커리어 목표</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="guestbook.html">방명록</a>
+    <ul class="sub">
+      <li><a href="guestbook.html#s-guest">글 남기기</a></li>
+      <li><a href="guestbook.html#s-gsec">보안 설계</a></li>
     </ul>
   </li>
 </ul>
@@ -112,6 +124,41 @@
         </ol>
 
         <p class="statement">틀리면 위험한 판단(알레르기 · 수치)은 규칙으로, 애매한 해석(취향 · 문장)만 AI로.</p>
+      </section>
+
+      <section aria-labelledby="s-screens">
+        <h2 id="s-screens">앱 화면</h2>
+        <p class="muted">안드로이드 앱은 팀원이 담당했고, 화면의 냉장고 · 레시피 데이터는 제가 만든 서버 API에서 받아옵니다.</p>
+        <ul class="phones">
+          <li>
+            <div class="phone"><img src="images/sf-home.png" alt="냉장고 목록 화면: 닭고기, 파, 계란이 유통기한과 함께 카드로 표시됨" loading="lazy"></div>
+            <strong>냉장고 목록</strong>
+            <span>재료 카드와 유통기한 표시</span>
+          </li>
+          <li>
+            <div class="phone"><img src="images/sf-recipes.png" alt="맞춤 레시피 추천 화면: 보유 재료 일치율과 함께 레시피 카드가 나열됨" loading="lazy"></div>
+            <strong>맞춤 레시피 추천</strong>
+            <span>보유 재료 일치율 순 정렬</span>
+          </li>
+          <li>
+            <div class="phone"><img src="images/sf-detail.png" alt="레시피 상세 화면: 필요 재료 목록과 단계별 조리 방법" loading="lazy"></div>
+            <strong>레시피 상세</strong>
+            <span>재료와 단계별 조리 순서</span>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="s-pipeline">
+        <h2 id="s-pipeline">추천 로직: 1,156개가 5개가 되기까지</h2>
+        <ol class="funnel">
+          <li style="--w:100%"><span class="f-bar"></span><span class="f-step">입력</span><strong>공공 레시피 1,156개</strong><span class="f-kind">데이터</span></li>
+          <li style="--w:82%"><span class="f-bar"></span><span class="f-step">1</span><strong>보유 재료 매칭</strong><span class="f-kind">규칙</span></li>
+          <li style="--w:66%"><span class="f-bar"></span><span class="f-step">2</span><strong>알레르기 14종 제외</strong><span class="f-kind">규칙</span></li>
+          <li style="--w:52%"><span class="f-bar"></span><span class="f-step">3</span><strong>식단 · 영양 기준</strong><span class="f-kind">규칙</span></li>
+          <li style="--w:38%"><span class="f-bar"></span><span class="f-step">4</span><strong>임박 재료 우선 · 상위 40개</strong><span class="f-kind">규칙</span></li>
+          <li style="--w:20%" class="ai"><span class="f-bar"></span><span class="f-step">5</span><strong>AI 취향 선별 · 최대 5개</strong><span class="f-kind">AI</span></li>
+        </ol>
+        <p class="flow-note">막대 길이는 단계별로 후보가 줄어드는 흐름을 보여 주는 개념도입니다. 틀리면 위험한 1~4단계는 규칙으로, 취향 해석인 5단계만 AI가 맡습니다.</p>
       </section>
 
       <section aria-labelledby="s-role">
@@ -156,7 +203,53 @@
             <dd>'계란'으로 검색해도 'egg' 레시피가 나오지 않았습니다. 식약처 한국어 공공데이터로 교체해 영양정보와 조리순서까지 확보했습니다.</dd>
           </div>
         </dl>
-        <p class="flow-note"><span class="pill">중간발표 기준</span> REST API 14개 중 9개 테스트 완료, 주요 테스트 케이스 8건 PASS. AI 기능 5종은 구현을 마쳤고 연동 테스트를 앞두고 있습니다.</p>
+      </section>
+
+      <section aria-labelledby="s-api">
+        <h2 id="s-api">REST API · 테스트 결과</h2>
+        <p><span class="pill">중간발표 기준</span> API 14개 중 9개 테스트 완료, AI 연동 5개는 API 키 발급 후 테스트 예정입니다.</p>
+        <div class="table-wrap">
+          <table class="grid api">
+            <thead>
+              <tr><th scope="col">메서드</th><th scope="col">엔드포인트</th><th scope="col">기능</th><th scope="col">상태</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>POST</code></td><td><code>/api/fridge</code></td><td>식재료 추가</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/fridge/bulk</code></td><td>여러 재료 일괄 등록 (유통기한 자동)</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/fridge/scan-receipt</code></td><td>영수증 사진 → AI 추출 · 저장</td><td><span class="st wait">예정</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/fridge</code></td><td>사용자별 전체 조회 (임박순)</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/fridge/expiring-soon</code></td><td>유통기한 임박 재료 조회</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/fridge/expiring-reminder</code></td><td>임박 재료 + AI 알림 문구</td><td><span class="st wait">예정</span></td></tr>
+              <tr><td><code>PUT</code> <code>DELETE</code></td><td><code>/api/fridge/{id}</code></td><td>식재료 수정 · 삭제</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/recipes/search</code></td><td>재료 하나로 검색</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/recipes/recommend-multi</code></td><td>여러 재료 + 영양 · 알레르기 · 식단 필터</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/recipes/recommend-auto</code></td><td>냉장고 자동 반영 + 임박 우선 정렬</td><td><span class="st ok">완료</span></td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/recipes/ask</code></td><td>자연어 대화형 추천</td><td><span class="st wait">예정</span></td></tr>
+              <tr><td><code>POST</code></td><td><code>/api/recipes/explain</code></td><td>AI 추천 이유 설명</td><td><span class="st wait">예정</span></td></tr>
+              <tr><td><code>GET</code></td><td><code>/api/recipes/{id}/translate</code></td><td>레시피 영어 번역 (AI)</td><td><span class="st wait">예정</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="sub-h">주요 테스트 케이스</h3>
+        <div class="table-wrap">
+          <table class="grid tc">
+            <thead>
+              <tr><th scope="col">ID</th><th scope="col">테스트 항목</th><th scope="col">입력 · 조건</th><th scope="col">실제 결과</th><th scope="col">판정</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>TC-01</td><td>레시피 데이터 적재</td><td>서버 최초 실행</td><td>1,156건 저장</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-02</td><td>영양정보 이상치 검증</td><td>열량 환산 교차검증</td><td>23건 제외</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-03</td><td>유통기한 자동 계산</td><td>계란 · 우유 · 당근 · 닭가슴살</td><td>+14 · +7 · +21 · +3일 일치</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-04</td><td>임박 재료 조회</td><td>days=3</td><td>닭가슴살만 반환</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-05</td><td>임박 우선 정렬</td><td>냉장고 자동 추천</td><td>닭가슴살 레시피 최상단</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-06</td><td>영양소 필터</td><td>protein ≥ 20</td><td>전체 결과 기준 충족</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-07</td><td>입력값 검증</td><td>이름 누락 · 음수 · 잘못된 영양소</td><td>3건 모두 400</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-08</td><td>수정 · 삭제</td><td>PUT / DELETE</td><td>변경 사항 반영</td><td><span class="st ok">PASS</span></td></tr>
+              <tr><td>TC-09</td><td>AI 기능 5종</td><td>영수증 · 대화 · 설명 · 번역 · 알림</td><td>API 키 발급 후</td><td><span class="st wait">예정</span></td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section aria-labelledby="s-tech">
