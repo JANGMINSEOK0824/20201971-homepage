@@ -11,9 +11,41 @@
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="mportfolio.css">
    <script src="js/mouse_event.js" defer></script>
+  <script src="js/lock.js" defer></script>
+  <script>
+    // 처음 들어올 때만 잠금 화면 (주소 끝에 ?intro를 붙이면 항상 보임)
+    try {
+      if (location.search.indexOf("intro") > -1 || !sessionStorage.getItem("unlocked")) {
+        document.documentElement.classList.add("locked");
+      }
+    } catch (e) {
+      document.documentElement.classList.add("locked");
+    }
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">본문 바로가기</a>
+
+  <!-- 인트로 잠금 화면 -->
+  <div class="lock" id="lock" role="dialog" aria-modal="true" aria-label="포트폴리오 시작 화면">
+    <svg class="lock-scene" id="city" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false"></svg>
+    <div class="lock-clock">
+      <div class="lock-time" id="lockTime"></div>
+      <div class="lock-date" id="lockDate"></div>
+    </div>
+    <p class="lock-hint">화면을 클릭하거나 아무 키나 누르세요</p>
+    <div class="lock-login">
+      <img class="lock-avatar" src="images/profile.jpg" alt="">
+      <p class="lock-name">장민석</p>
+      <p class="lock-role">Junior AI Developer &amp; Infra &amp; Data Security Engineer</p>
+      <button class="lock-btn" type="button" id="lockEnter">
+        포트폴리오 보기
+        <span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </button>
+      <p class="lock-sub">Enter 키로도 들어갈 수 있어요</p>
+    </div>
+    <p class="lock-brand">PORTFOLIO · 2026</p>
+  </div>
 
   <!-- 공통 배너 -->
   <header class="banner">

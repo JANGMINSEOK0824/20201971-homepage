@@ -1312,3 +1312,267 @@ tr:last-child td {
     transform: none;
   }
 }
+
+/* ==========================================================
+   인트로 잠금 화면 (index.html) — 야경 도시 → 로그인 → 포트폴리오
+   ========================================================== */
+.lock {
+  display: none;
+}
+html.locked,
+html.locked body {
+  overflow: hidden;
+}
+html.locked .lock {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(180deg, #040818 0%, #0a1438 34%, #1b2a6b 60%, #4a3f7d 80%, #b5786a 100%);
+  transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.lock--login {
+  cursor: default;
+}
+.lock--out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.lock-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s ease, filter 0.6s ease;
+}
+.lock--login .lock-scene {
+  filter: blur(10px) brightness(0.7);
+  transform: scale(1.06);
+}
+
+/* 시계 */
+.lock-clock {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(13vh + env(safe-area-inset-top, 0px));
+  text-align: center;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.6s ease, opacity 0.5s ease;
+}
+.lock-time {
+  font-size: clamp(4rem, 15vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.lock-date {
+  margin-top: 10px;
+  font-size: clamp(1rem, 3.8vw, 1.4rem);
+  font-weight: 500;
+  opacity: 0.92;
+}
+.lock-clock {
+  z-index: 1;
+}
+.lock-clock::before {
+  content: "";
+  position: absolute;
+  inset: -50px 10%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(4, 8, 24, 0.7), transparent);
+}
+.lock--login .lock-clock {
+  transform: translateY(-40px);
+  opacity: 0;
+}
+
+.lock-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(13vh + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  margin: 0;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(4, 8, 24, 0.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  text-align: center;
+  font-size: 0.92rem;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  animation: hint-pulse 2.4s ease-in-out infinite;
+}
+.lock--login .lock-hint {
+  opacity: 0;
+  animation: none;
+}
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+.lock-brand {
+  position: absolute;
+  left: 24px;
+  top: calc(22px + env(safe-area-inset-top, 0px));
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: var(--gold);
+}
+
+/* 로그인 패널 */
+.lock-login {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px);
+  transition: opacity 0.5s 0.15s, transform 0.5s 0.15s, visibility 0s 0.65s;
+}
+.lock--login .lock-login {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.5s 0.15s, transform 0.5s 0.15s;
+}
+.lock-avatar {
+  width: 132px;
+  height: 132px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.12), 0 20px 50px -10px rgba(0, 0, 0, 0.6);
+}
+.lock-name {
+  margin: 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.lock-role {
+  max-width: none;
+  margin: 2px 0 22px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.lock-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 650;
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: background-color 0.2s, transform 0.2s;
+}
+.lock-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+.lock-btn .arr {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.lock-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.lock-sub {
+  margin: 14px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* 도시 움직임 */
+.lock .par {
+  transition: transform 0.3s ease-out;
+}
+.lock .drift {
+  animation: city-drift linear infinite;
+}
+.lock .drift-far { animation-duration: 320s; }
+.lock .drift-mid { animation-duration: 200s; }
+.lock .drift-near { animation-duration: 130s; }
+@keyframes city-drift {
+  to { transform: translateX(-1600px); }
+}
+.lock .star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+.lock .tw {
+  animation: window-blink 4s steps(1) infinite;
+}
+@keyframes window-blink {
+  50% { opacity: 0.1; }
+}
+.lock .beacon {
+  animation: beacon 1.6s ease-in-out infinite;
+}
+@keyframes beacon {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+.lock .trail {
+  animation: trail linear infinite;
+}
+.lock .trail.rev {
+  animation-name: trail-rev;
+}
+@keyframes trail {
+  to { stroke-dashoffset: -400; }
+}
+@keyframes trail-rev {
+  to { stroke-dashoffset: 400; }
+}
+.lock .plane {
+  animation: plane 45s linear infinite;
+}
+@keyframes plane {
+  from { transform: translateX(-60px); }
+  to { transform: translateX(1700px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lock .drift,
+  .lock .star,
+  .lock .tw,
+  .lock .beacon,
+  .lock .trail,
+  .lock .plane,
+  .lock-hint {
+    animation: none;
+  }
+}

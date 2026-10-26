@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: "0px 0px -40px 0px" });
     targets.forEach(function (el) {
       el.classList.add("reveal");
       io.observe(el);
