@@ -5,34 +5,40 @@
    ========================================================== */
 
 :root {
+  /* 화이트 + 블루 테마
+     (이전 청록 테마: bg #f2f6f7 / deep #0a2530 → #0f3b4a / accent #1dbe96 / teal #087563) */
+
   /* 바탕 / 면 / 선 */
-  --bg: #f2f6f7;
+  --bg: #f4f8ff;
   --surface: #ffffff;
-  --surface-2: #f5f9fa;
-  --line: #dce5e8;
+  --surface-2: #f4f8ff;
+  --line: #dbe5f5;
 
   /* 글자 */
-  --ink: #13212b;
-  --muted: #566771;
+  --ink: #0f1b33;
+  --muted: #51607a;
 
-  /* 헤더(진한 청록 남색) */
-  --deep: #0a2530;
-  --deep-2: #0f3b4a;
+  /* 헤더(블루 그라데이션) */
+  --deep: #1d4ed8;
+  --deep-2: #2563eb;
 
   /* 포인트 */
-  --accent: #1dbe96;      /* 장식용 민트 */
-  --teal: #087563;        /* 글자로 쓰는 청록 (대비 확보) */
-  --focus: #2f6bff;
+  --accent: #2563eb;      /* 장식용 메인 블루 */
+  --teal: #1d4ed8;        /* 글자로 쓰는 진한 블루 (대비 확보) */
+  --on-accent: #ffffff;   /* 포인트 색 위 글자 */
+  --banner-dot: #bfdbfe;  /* 배너 그래프의 강조 점 */
+  --focus: #f59e0b;
 
-  /* 기술 스택 그룹 색 (이력서와 같은 4색) */
-  --c-sap: #2f6bff;
+  /* 기술 스택 그룹 색 */
+  --c-sap: #2563eb;
+  --c-sec: #0e7490;
   --c-be: #0b8a75;
   --c-mo: #7a5cfa;
   --c-tool: #c77a0a;
 
   --radius: 16px;
   --radius-sm: 10px;
-  --shadow: 0 1px 2px rgba(10, 37, 48, 0.05), 0 10px 28px -16px rgba(10, 37, 48, 0.28);
+  --shadow: 0 1px 2px rgba(15, 27, 51, 0.05), 0 10px 28px -16px rgba(29, 78, 216, 0.28);
 
   --font: "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic",
     "Apple SD Gothic Neo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -40,18 +46,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0a151b;
-    --surface: #101f27;
-    --surface-2: #142731;
-    --line: #22383f;
-    --ink: #e6f0f2;
-    --muted: #93a8b0;
-    --deep: #071a22;
-    --deep-2: #0d3140;
-    --accent: #3ddbb0;
-    --teal: #4fe0bc;
-    --focus: #7fb0ff;
+    --bg: #0b1220;
+    --surface: #111a2e;
+    --surface-2: #16213a;
+    --line: #24324f;
+    --ink: #e6edf8;
+    --muted: #97a6c0;
+    --deep: #13245a;
+    --deep-2: #1e3a8a;
+    --accent: #60a5fa;
+    --teal: #93c5fd;
+    --on-accent: #0b1220;
+    --banner-dot: #93c5fd;
+    --focus: #fbbf24;
     --c-sap: #6e97ff;
+    --c-sec: #22d3ee;
     --c-be: #3ddbb0;
     --c-mo: #a48dff;
     --c-tool: #f0a63e;
@@ -181,11 +190,11 @@ a {
   fill: rgba(255, 255, 255, 0.7);
 }
 .graph .out {
-  fill: var(--accent);
+  fill: var(--banner-dot);
 }
 .graph .halo {
   fill: none;
-  stroke: var(--accent);
+  stroke: var(--banner-dot);
   stroke-opacity: 0.5;
   stroke-width: 1.5;
 }
@@ -225,7 +234,7 @@ a {
 }
 
 .tabs a[aria-current="page"] {
-  color: var(--ink);
+  color: var(--teal);
   border-bottom-color: var(--accent);
 }
 
@@ -362,6 +371,7 @@ p {
 }
 
 .g-sap { --c: var(--c-sap); }
+.g-sec { --c: var(--c-sec); }
 .g-be { --c: var(--c-be); }
 .g-mo { --c: var(--c-mo); }
 .g-tool { --c: var(--c-tool); }
@@ -563,6 +573,108 @@ tr:last-child td {
   line-height: 1.6;
 }
 
+/* 경력 */
+.jobs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
+}
+.jobs > li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.jobs > li + li {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.logo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+.logo.co-bw { background: #1d4ed8; }
+.logo.co-gba { background: #0f1b33; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.job-body {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 2px;
+}
+.job-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.job-head strong {
+  font-size: 1.05rem;
+  font-weight: 750;
+}
+.job-body .sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.dots {
+  margin: 8px 0 10px;
+  padding-left: 1.1em;
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+.dots li + li {
+  margin-top: 2px;
+}
+.dots li::marker {
+  color: var(--accent);
+}
+
+/* 자격증 학습 순서 */
+.path {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.path li {
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.path li {
+  position: relative;
+}
+.path li + li {
+  margin-left: 18px;
+}
+.path li + li::before {
+  content: "→";
+  position: absolute;
+  left: -21px;
+  color: var(--muted);
+}
+.path li.now {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
 /* 커리어 목표 타임라인 */
 .timeline {
   list-style: none;
@@ -661,7 +773,7 @@ tr:last-child td {
 }
 .mark.gh { background: #24292f; }
 .mark.sap { background: #1560d4; }
-.mark.ml { background: #0b8a75; font-size: 1.05rem; }
+.mark.ml { background: #1d4ed8; font-size: 1.05rem; }
 
 .link-list .txt {
   min-width: 0;
@@ -700,12 +812,12 @@ tr:last-child td {
   padding: 11px 17px 11px 14px;
   border-radius: 999px;
   background: var(--accent);
-  color: #04231b;
+  color: var(--on-accent);
   font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  box-shadow: 0 8px 20px -8px rgba(10, 37, 48, 0.55);
+  box-shadow: 0 8px 20px -8px rgba(29, 78, 216, 0.6);
   transition: filter 0.15s;
 }
 .fab:hover {
@@ -819,7 +931,7 @@ tr:last-child td {
 .chips li.is-hover {
   transform: translateY(-2px);
   background: var(--accent);
-  color: #04231b;
+  color: var(--on-accent);
 }
 .photo {
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -896,4 +1008,11 @@ tr:last-child td {
 
 .photo-box:hover .p-alt {
   opacity: 1;
+}
+
+/* ---------- 푸터 메모 ---------- */
+.foot .exam {
+  margin-left: 4px;
+  font-size: 0.72rem;
+  opacity: 0.7;
 }
