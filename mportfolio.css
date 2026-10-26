@@ -5,40 +5,51 @@
    ========================================================== */
 
 :root {
-  /* 화이트 + 블루 테마
-     (이전 청록 테마: bg #f2f6f7 / deep #0a2530 → #0f3b4a / accent #1dbe96 / teal #087563) */
+  /* 미드나이트 사파이어 테마 (네이비 → 사파이어 그라데이션 + 샴페인 골드 포인트)
+     이전 화이트+블루: deep #1d4ed8 → #2563eb / accent #2563eb
+     이전 청록: bg #f2f6f7 / deep #0a2530 → #0f3b4a / accent #1dbe96 / teal #087563 */
 
   /* 바탕 / 면 / 선 */
-  --bg: #f4f8ff;
+  --bg: #eef2f9;
+  --bg-glow-1: rgba(99, 102, 241, 0.12);   /* 왼쪽 위 인디고 빛 */
+  --bg-glow-2: rgba(56, 189, 248, 0.10);   /* 오른쪽 위 하늘빛 */
   --surface: #ffffff;
-  --surface-2: #f4f8ff;
-  --line: #dbe5f5;
+  --surface-2: #f5f7fc;
+  --line: #e1e7f2;
 
   /* 글자 */
-  --ink: #0f1b33;
-  --muted: #51607a;
+  --ink: #0d1530;
+  --muted: #56617a;
 
-  /* 헤더(블루 그라데이션) */
-  --deep: #1d4ed8;
-  --deep-2: #2563eb;
+  /* 헤더(미드나이트 → 사파이어) */
+  --deep: #0a1230;
+  --deep-2: #14245e;
+  --deep-3: #1f3d99;
+  --glow: rgba(129, 140, 248, 0.55);       /* 배너 오른쪽 위 보랏빛 번짐 */
 
   /* 포인트 */
-  --accent: #2563eb;      /* 장식용 메인 블루 */
-  --teal: #1d4ed8;        /* 글자로 쓰는 진한 블루 (대비 확보) */
+  --accent: #3150d4;      /* 장식용 사파이어 */
+  --accent-2: #5b47d6;    /* 그라데이션 짝 (인디고) */
+  --teal: #2740b8;        /* 글자로 쓰는 진한 사파이어 (대비 확보) */
   --on-accent: #ffffff;   /* 포인트 색 위 글자 */
-  --banner-dot: #bfdbfe;  /* 배너 그래프의 강조 점 */
+  --gold: #d9b26a;        /* 샴페인 골드 */
+  --banner-dot: var(--gold);
   --focus: #f59e0b;
 
   /* 기술 스택 그룹 색 */
-  --c-sap: #2563eb;
+  --c-sap: #3150d4;
   --c-sec: #0e7490;
   --c-be: #0b8a75;
   --c-mo: #7a5cfa;
-  --c-tool: #c77a0a;
+  --c-tool: #b7791f;
 
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 1px 2px rgba(15, 27, 51, 0.05), 0 10px 28px -16px rgba(29, 78, 216, 0.28);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 1px 2px rgba(13, 21, 48, 0.04),
+    0 4px 10px -4px rgba(13, 21, 48, 0.06),
+    0 22px 44px -22px rgba(31, 61, 153, 0.30);
 
   --font: "Pretendard Variable", Pretendard, "Noto Sans KR", "Malgun Gothic",
     "Apple SD Gothic Neo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -46,25 +57,33 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0b1220;
-    --surface: #111a2e;
-    --surface-2: #16213a;
-    --line: #24324f;
-    --ink: #e6edf8;
-    --muted: #97a6c0;
-    --deep: #13245a;
-    --deep-2: #1e3a8a;
-    --accent: #60a5fa;
-    --teal: #93c5fd;
-    --on-accent: #0b1220;
-    --banner-dot: #93c5fd;
+    --bg: #070b1a;
+    --bg-glow-1: rgba(99, 102, 241, 0.16);
+    --bg-glow-2: rgba(56, 189, 248, 0.08);
+    --surface: #0e1530;
+    --surface-2: #131c3c;
+    --line: #232e55;
+    --ink: #e7ecf8;
+    --muted: #9aa6c4;
+    --deep: #050918;
+    --deep-2: #0e1a48;
+    --deep-3: #1b3184;
+    --glow: rgba(129, 140, 248, 0.45);
+    --accent: #7c95ff;
+    --accent-2: #a18bff;
+    --teal: #a5b6ff;
+    --on-accent: #070b1a;
+    --gold: #e3c182;
     --focus: #fbbf24;
-    --c-sap: #6e97ff;
+    --c-sap: #7c95ff;
     --c-sec: #22d3ee;
     --c-be: #3ddbb0;
     --c-mo: #a48dff;
     --c-tool: #f0a63e;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -16px rgba(0, 0, 0, 0.6);
+    --shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 22px 44px -22px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -86,7 +105,11 @@ body {
   font-size: 1rem;
   line-height: 1.75;
   color: var(--ink);
-  background: var(--bg);
+  background:
+    radial-gradient(900px 520px at 0% 0%, var(--bg-glow-1), transparent 70%),
+    radial-gradient(800px 480px at 100% 10%, var(--bg-glow-2), transparent 70%),
+    var(--bg);
+  min-height: 100vh;
   word-break: keep-all;
   overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
@@ -135,8 +158,11 @@ a {
   overflow: hidden;
   color: #fff;
   background:
-    radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1.3px) 0 0 / 18px 18px,
-    linear-gradient(135deg, var(--deep) 0%, var(--deep-2) 100%);
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1.3px) 0 0 / 18px 18px,
+    radial-gradient(600px 300px at 88% -10%, var(--glow), transparent 70%),
+    radial-gradient(500px 260px at 0% 120%, rgba(56, 189, 248, 0.22), transparent 70%),
+    linear-gradient(135deg, var(--deep) 0%, var(--deep-2) 55%, var(--deep-3) 100%);
+  box-shadow: inset 0 -1px 0 rgba(217, 178, 106, 0.35);
 }
 
 .banner-in {
@@ -204,8 +230,11 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--surface);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 6px 18px -14px rgba(13, 21, 48, 0.35);
 }
 
 .tabs ul {
@@ -276,7 +305,7 @@ h2::before {
   width: 4px;
   height: 1.05em;
   border-radius: 2px;
-  background: var(--accent);
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
 }
 
 h3 {
@@ -602,8 +631,8 @@ tr:last-child td {
   letter-spacing: 0.02em;
   color: #fff;
 }
-.logo.co-bw { background: #1d4ed8; }
-.logo.co-gba { background: #0f1b33; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
+.logo.co-bw { background: linear-gradient(135deg, #3150d4, #5b47d6); }
+.logo.co-gba { background: linear-gradient(135deg, #0a1230, #1f3d99); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22); }
 .job-body {
   min-width: 0;
   flex: 1;
@@ -792,7 +821,10 @@ tr:last-child td {
 
 /* ---------- 푸터 ---------- */
 .foot {
-  background: var(--deep);
+  background:
+    radial-gradient(500px 200px at 100% 0%, var(--glow), transparent 70%),
+    linear-gradient(135deg, var(--deep) 0%, var(--deep-2) 100%);
+  box-shadow: inset 0 1px 0 rgba(217, 178, 106, 0.3);
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.84rem;
 }
@@ -811,13 +843,13 @@ tr:last-child td {
   gap: 8px;
   padding: 11px 17px 11px 14px;
   border-radius: 999px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: var(--on-accent);
   font-size: 0.92rem;
   font-weight: 700;
   line-height: 1.2;
   text-decoration: none;
-  box-shadow: 0 8px 20px -8px rgba(29, 78, 216, 0.6);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 24px -8px rgba(49, 80, 212, 0.65);
   transition: filter 0.15s;
 }
 .fab:hover {
@@ -1015,4 +1047,38 @@ tr:last-child td {
   margin-left: 4px;
   font-size: 0.72rem;
   opacity: 0.7;
+}
+
+/* ---------- 학교 위치 지도 ---------- */
+.addr {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.map {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+}
+.map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.map-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+@media (min-width: 560px) {
+  .map {
+    aspect-ratio: 16 / 9;
+  }
 }
